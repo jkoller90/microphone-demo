@@ -34,13 +34,16 @@ public class AudioVisualizer : MonoBehaviour {
 
 		// populate array with fequency spectrum data
 		GetComponent<AudioSource>().GetSpectrumData(spectrum, 0, fftWindow);
-
+//		for (int n = 0; n < spectrum.Length; n++) {
+//			Debug.Log (spectrum [n]);
+//		}
+//		Debug.Log(spectrum);
 
 		// loop over audioSpectrumObjects and modify according to fequency spectrum data
 		// this loop matches the Array element to an object on a One-to-One basis.
 		for(int i = 0; i < audioSpectrumObjects.Length; i++)
 		{
-
+	
 			// apply height multiplier to intensity
 			float intensity = spectrum[i] * heightMultiplier;
 

@@ -1,4 +1,7 @@
 // Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
+
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
 
 Shader "FX/Water" {
 Properties {
@@ -72,12 +75,12 @@ struct v2f {
 v2f vert(appdata v)
 {
 	v2f o;
-	o.pos = mul (UNITY_MATRIX_MVP, v.vertex);
+	o.pos = UnityObjectToClipPos (v.vertex);
 	
 
 	// scroll bump waves
 	float4 temp;
-	float4 wpos = mul (_Object2World, v.vertex);
+	float4 wpos = mul (unity_ObjectToWorld, v.vertex);
 	temp.xyzw = wpos.xzxz * _WaveScale4 + _WaveOffset;
 	o.bumpuv0 = temp.xy;
 	o.bumpuv1 = temp.wz;

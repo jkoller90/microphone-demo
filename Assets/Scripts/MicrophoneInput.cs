@@ -16,6 +16,8 @@ public class MicrophoneInput : MonoBehaviour {
 	private int samples = 8192; 
 	private AudioSource audioSource;
 
+	public AudioClip otherClip;
+
 	void Start() {
 		
 
@@ -48,11 +50,12 @@ public class MicrophoneInput : MonoBehaviour {
 
 	void UpdateMicrophone(){
 		audioSource.Stop(); 
+		otherClip = audioSource.clip;
 		//Start recording to audioclip from the mic
 		audioSource.clip = Microphone.Start(microphone, true, 10, audioSampleRate);
 		audioSource.loop = true; 
 		// Mute the sound with an Audio Mixer group becuase we don't want the player to hear it
-		Debug.Log(Microphone.IsRecording(microphone).ToString());
+//		Debug.Log(Microphone.IsRecording(microphone).ToString());
 
 		if (Microphone.IsRecording (microphone)) { //check that the mic is recording, otherwise you'll get stuck in an infinite loop waiting for it to start
 			while (!(Microphone.GetPosition (microphone) > 0)) {
@@ -100,6 +103,7 @@ public class MicrophoneInput : MonoBehaviour {
 		int i = 0;
 		for (int j = 1; j < samples; j++)
 		{
+			
 			if(data[j] > minThreshold) // volumn must meet minimum threshold
 			{
 				if ( s < data[j] )
@@ -111,6 +115,22 @@ public class MicrophoneInput : MonoBehaviour {
 		}
 		fundamentalFrequency = i * audioSampleRate / samples;
 		frequency = fundamentalFrequency;
+		Debug.Log (fundamentalFrequency);
 		return fundamentalFrequency;
 	}
 }
+
+
+/*
+public AudioClip otherClip;
+
+IEnumerator Start()
+{
+	AudioSource audio = GetComponent<AudioSource>();
+
+	audio.Play();
+	yield return new WaitForSeconds(audio.clip.length);
+	audio.clip = otherClip;
+	audio.Play();
+}
+*/
