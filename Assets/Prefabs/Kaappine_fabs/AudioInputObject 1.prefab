@@ -190,7 +190,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 100
   loudness: 10
-  SampleCount: 12
+  sampleCount: 12
+  sampleRate: 11024
 --- !u!114 &114325222569276130
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,7 +205,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sensitivity: 100
   loudness: 4
-  SampleCount: 14
+  sampleCount: 12
 --- !u!114 &114941698976754494
 MonoBehaviour:
   m_ObjectHideFlags: 1
